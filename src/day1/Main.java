@@ -12,7 +12,7 @@ public class Main {
     Integer[] inputs = 
       Files
         .lines(Path.of("inputs/day1"))
-        .map(l -> Integer.parseInt(l))
+        .map(Integer::parseInt)
         .toArray(Integer[]::new);
     
     Utils.printResultWithExecutionTime(() -> Part1(inputs), "Part 1; ");
