@@ -24,23 +24,25 @@ public class Main {
   }
 
   public static Integer Part1(List<ParsedLine> inputs) {
-    return Utils.reduce(inputs, 0, (ParsedLine cur, Integer acc) -> {
+    int result = 0;
+    for (ParsedLine cur : inputs) {
       int charCount = Utils.countChars(cur.password, cur.letter);
       if (charCount >= cur.low && charCount <= cur.high)
-        return acc + 1;
-      
-      return acc;
-    });
+        result++;
+    }
+    
+    return result;
   }
   
   public static Integer Part2(List<ParsedLine> inputs) {
-    return Utils.reduce(inputs, 0, (ParsedLine cur, Integer acc) -> {
+    int result = 0;
+    for (ParsedLine cur : inputs) {
       if (cur.password.charAt(cur.low - 1) == cur.letter ^ 
           cur.password.charAt(cur.high - 1) == cur.letter)
-        return acc + 1;
-      
-      return acc;
-    });
+        result++;
+    }
+    
+    return result;
   }
   
   public static ParsedLine parseLine(String line) {

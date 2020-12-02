@@ -1,7 +1,5 @@
 package helpers;
 
-import java.util.List;
-import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 public class Utils {
@@ -22,51 +20,6 @@ public class Utils {
     System.out.println("\t...in " + ((endTime - startTime) / (float)1000000) + "ms\n");
     
     return result;
-  }
-  
-  /**
-   * Fold the given list of T's with the accumulator function for TRes. 
-   * 
-   * Why is this not in the standard library.
-   * 
-   * NOTE: This is probably faster in a loop? I don't think Java does tail
-   * recursion? Might kill the stack on a big list.
-   * 
-   * @param <T> The type of list items
-   * @param <TRes> The result type
-   * @param cs The list of items to fold
-   * @param acc The accumulating result
-   * @param f The accumulator function
-   * @return The accumulated TRes result
-   */
-  public static <T, TRes> TRes reduceRec(List<T> cs, TRes acc, BiFunction<T, TRes, TRes> f) {
-    if (cs.isEmpty())
-      return acc;
-
-    return reduceRec(
-        cs.subList(1, cs.size()),
-        f.apply(cs.get(0), acc),
-        f);
-  }
-  /**
-   * Fold the given list of T's with the accumulator function for TRes. 
-   * Loop version. Should be better.
-   * 
-   * Why is this not in the standard library.
-   * 
-   * @param <T> The type of list items
-   * @param <TRes> The result type
-   * @param cs The list of items to fold
-   * @param acc The accumulating result
-   * @param f The accumulator function
-   * @return The accumulated TRes result
-   */
-  public static <T, TRes> TRes reduce(List<T> cs, TRes acc, BiFunction<T, TRes, TRes> f) {
-    for (T c : cs) {
-      acc = f.apply(c, acc);
-    }
-    
-    return acc;
   }
 
   /**
